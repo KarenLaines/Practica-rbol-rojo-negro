@@ -177,8 +177,6 @@ export class RBTree {
         }
     }
 
-
-    // -------------------------------------------------------------DELETE NODE PROOF ---------------------------------
     // borrar por GPA
     public deleteNode(GPA: number): void {
     let nodeToDelete: NodeRBT | null = this.search(GPA);
@@ -293,5 +291,29 @@ export class RBTree {
         }
         node.setNodeAsBlack();
     }
+
+    public findInRange(min: number, max: number, node: NodeRBT = this.root, range: NodeRBT[] = []): void {
+    // Caso base: Si el nodo es el nodo 'leaf', terminar la búsqueda
+    if (node === this.leaf) {
+        return; 
+    }
+
+    // Si el GPA del nodo está dentro del rango, agregar el nodo al array
+    if (node.getData().getGPA() >= min && node.getData().getGPA() <= max) {
+        range.push(node);
+    } else {
+        console.log(`Nodo fuera de rango: GPA: ${node.getData().getGPA()}`);
+    }
+
+    // Llamadas recursivas a los hijos izquierdo y derecho
+    this.findInRange(min, max, node.getLeftChild(), range);
+    this.findInRange(min, max, node.getRightChild(), range);
+
+    // Al regresar a la raíz, imprimir los nodos que están dentro del rango
+    if (node === this.root) {
+        console.log("Nodos dentro del rango:", range.map(n => n.getData().showInformation()));
+    }
+}
+
 
 }

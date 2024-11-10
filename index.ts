@@ -11,7 +11,8 @@ myRBTree.insert(new Estudent(6, 'Luis', 23, 6));
 myRBTree.insert(new Estudent(7, 'Sebastian', 23, 8));
 
 
-console.log(myRBTree.search(54));
+console.log(myRBTree.search(5)?.getData().showInformation());
 myRBTree.printAll();
 myRBTree.deleteNode(5);
-myRBTree.printAll();
+
+myRBTree.findInRange(1, 4)
