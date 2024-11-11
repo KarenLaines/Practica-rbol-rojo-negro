@@ -15,7 +15,7 @@ class Medicamento {
         return match ? match[0] : ""; // Devuelve la parte numérica o una cadena vacía si no la encuentra
     }
 }
-// sin patrones ---------------------------------------------------------
+// sin patrones ----------------------------------------------------------------------------------------------------
 // Ejemplo de uso
 const medicamentox = new Medicamento("Ibuprofeno", "P0012", 10.50);
 console.log(medicamentox.obtenerCodigoNumerico()); // Imprimirá "0012"
