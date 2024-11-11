@@ -97,15 +97,16 @@ class MinHeap{
     }
 
     //  método para listar los nodos dentro de un rango de prioridad
-    public listInRange(minPriority: number, maxPriority: number): Task[] {
-        const nodesInRange: Task[] = [];
-        for (let i = 1; i <= this.n; i++) {
-            if (this.heap[i].getPriority() >= minPriority && this.heap[i].getPriority() <= maxPriority) {
-                nodesInRange.push(this.heap[i]);
-            }
+    public listTasksInRange(minPriority: number, maxPriority: number): string {
+    let result = "Tareas en el rango de prioridad [" + minPriority + ", " + maxPriority + "]:\n";
+    for (let i = 1; i <= this.n; i++) {
+        if (this.heap[i].getPriority() >= minPriority && this.heap[i].getPriority() <= maxPriority) {
+            result += this.heap[i].showInformation() + "\n";
         }
-        return nodesInRange;
     }
+    return result.trim(); // Elimina espacios al final de la cadena
+}
+
 
     public print(): void {
         let tree: string = "";
@@ -135,6 +136,6 @@ console.log("La siguiente tarea a realizar es: " + pendientes.getNextTask());
 console.log("La siguiente tarea a realizar es: " + pendientes.getNextTask());
 
 
-// Llamada al  método para obtener tareas con prioridad entre 1 y 3
-const tasksInRange = pendientes.listInRange(1, 3);
-tasksInRange.forEach(task => console.log(task.showInformation())); 
+// Llamada a listTasksInRange para obtener tareas con prioridad entre 1 y 3
+console.log(pendientes.listTasksInRange(1, 3));
+

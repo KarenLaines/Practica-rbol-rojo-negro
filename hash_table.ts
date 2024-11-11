@@ -1,40 +1,71 @@
+
+// Clase Estudiante que representa los datos de un estudiante
+class Estudiante {
+    private nombre: string;
+    private carnet: number;
+    private carrera: string;
+
+    constructor(nombre: string, carnet: number, carrera: string) {
+        this.nombre = nombre;
+        this.carnet = carnet;
+        this.carrera = carrera;
+    }
+
+    public getNombre(): string {
+        return this.nombre;
+    }
+
+    public getCarnet(): number {
+        return this.carnet;
+    }
+
+    public getCarrera(): string {
+        return this.carrera;
+    }
+
+    public toString(): string {
+        return `${this.carnet} - ${this.nombre} - ${this.carrera}`;  // Representación en texto del estudiante
+    }
+}
+
+
 // Clase Nodo que representa un nodo de una lista doblemente enlazada
 class Nodo {
     constructor(
-        public data: Estudiante,  // Datos del nodo, en este caso un objeto de tipo Estudiante
-        public prev: Nodo | null = null,  // Referencia al nodo anterior en la lista
-        public next: Nodo | null = null   // Referencia al siguiente nodo en la lista
+        public data: Estudiante,  
+        public prev: Nodo | null = null,  
+        public next: Nodo | null = null   
     ) {}
 }
 
 // Clase que representa una lista doblemente enlazada
 class DoubleLinkedList {
-    private head: Nodo | null = null;  // Primer nodo de la lista
-    private tail: Nodo | null = null;  // Último nodo de la lista
+    private head: Nodo | null = null;  
+    private tail: Nodo | null = null;  
 
     // Método para insertar un nuevo nodo al final de la lista
     public insert(data: Estudiante): void {
-        const newNode = new Nodo(data);  // Crea un nuevo nodo con los datos del estudiante
-        if (!this.tail) {  // Si la lista está vacía
+        const newNode = new Nodo(data); 
+        if (this.tail == null) {  // Si la lista está vacía
             this.head = newNode;  // El nuevo nodo es tanto head como tail
             this.tail = newNode;
         } else {
-            newNode.prev = this.tail;  // El nuevo nodo apunta hacia el antiguo último nodo
-            this.tail.next = newNode;  // El antiguo último nodo apunta hacia el nuevo nodo
-            this.tail = newNode;  // El nuevo nodo se convierte en el último nodo
+            newNode.prev = this.tail;  
+            this.tail.next = newNode;  
+            this.tail = newNode; 
         }
     }
 
     // Método para buscar un nodo en la lista por el carnet del estudiante
     public search(carnet: number): Estudiante | null {
-        let current = this.head;  // Inicia desde el head de la lista
+        let current = this.head; 
         while (current) {  // Recorre la lista hasta encontrar el nodo o llegar al final
             if (current.data.getCarnet() === carnet) {  // Verifica si el carnet coincide
                 return current.data;  // Retorna los datos del estudiante si coincide
             }
             current = current.next;  // Avanza al siguiente nodo
         }
-        return null;  // Retorna null si no se encontró el estudiante
+        return null;  // Estudiante no encontrado
     }
 
     // Método para eliminar un nodo de la lista por el carnet del estudiante
@@ -77,35 +108,6 @@ class DoubleLinkedList {
         }
 
         return result;
-    }
-}
-
-// Clase Estudiante que representa los datos de un estudiante
-class Estudiante {
-    private nombre: string;
-    private carnet: number;
-    private carrera: string;
-
-    constructor(nombre: string, carnet: number, carrera: string) {
-        this.nombre = nombre;
-        this.carnet = carnet;
-        this.carrera = carrera;
-    }
-
-    public getNombre(): string {
-        return this.nombre;
-    }
-
-    public getCarnet(): number {
-        return this.carnet;
-    }
-
-    public getCarrera(): string {
-        return this.carrera;
-    }
-
-    public toString(): string {
-        return `${this.carnet} - ${this.nombre} - ${this.carrera}`;  // Representación en texto del estudiante
     }
 }
 
